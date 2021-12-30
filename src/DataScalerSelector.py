@@ -1,4 +1,7 @@
 import warnings
+
+warnings.filterwarnings("ignore")
+
 import numpy as np
 import pandas as pd
 
@@ -11,8 +14,6 @@ from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.svm import SVR
 
-warnings.filterwarnings("ignore")
-
 
 def rmse(predictions, targets):
     return np.sqrt(((predictions - targets) ** 2).mean())
@@ -24,13 +25,15 @@ def r2_score(y, y_hat):
     ss_res = ((y - y_hat) ** 2).sum()
     return 1 - (ss_res / ss_tot)
 
-def scaler(X,y):
+
+def scalerselector_regression(X, y):
     # split into train and test sets
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=1)
     # summarize
-    print('Train Size', X_train.shape, y_train.shape)
-    print('Test Size', X_test.shape, y_test.shape)
+    print('Train Data Size', X_train.shape, y_train.shape)
+    print('Test Data Size', X_test.shape, y_test.shape)
+    print('\n')
 
     col_list = list(X.columns.values)
 
@@ -77,6 +80,7 @@ def scaler(X,y):
         # transform the testing data column
         X_test_rob[i] = scale.transform(X_test_rob[[i]])
 
+    # LR
     LR = LinearRegression()
 
     rmse_LR = []
@@ -94,18 +98,21 @@ def scaler(X,y):
         pred = LR.predict(testX[i])
         # RMSE
         rmse_LR.append(rmse(y_test, pred))
+        # rmse_LR.append(np.sqrt(mean_squared_error(y_test,pred)))
         # r2
         r2_LR.append(r2_score(y_test, pred))
 
     # visualizing the result
-    df_LR = pd.DataFrame({'RMSE': rmse_LR, 'R2': r2_LR, 'Model': LR}, index=['Original', 'Normalized', 'Standardized', 'RobustScaler'])
-    print(df_LR)
+    df_LR = pd.DataFrame({'RMSE': rmse_LR, 'R2': r2_LR},
+                         index=['Original', 'Normalized', 'Standardized', 'RobustScaler'])
+    print("\nLinear Regression Results\n", df_LR)
+    print('\n')
 
     # rfr = RandomForestRegressor(n_estimators = 100, max_depth = 5, min_samples_leaf= 5, max_features = 'sqrt')  # using GridSearch
     rfr = RandomForestRegressor()
 
-    rmse_RF = []
-    r2_RF = []
+    rmse_rfr = []
+    r2_rfr = []
 
     # raw, normalized and standardized training and testing data
     trainX = [X_train, X_train_norm, X_train_stand, X_train_rob]
@@ -118,19 +125,22 @@ def scaler(X,y):
         # predict
         pred = rfr.predict(testX[i])
         # RMSE
-        rmse_RF.append(rmse(y_test, pred))
+        rmse_rfr.append(rmse(y_test, pred))
+        # rmse_rfr.append(np.sqrt(mean_squared_error(y_test,pred)))
         # R2
-        r2_RF.append(r2_score(y_test, pred))
+        r2_rfr.append(r2_score(y_test, pred))
 
     # visualizing the result
-    df_rf = pd.DataFrame({'RMSE': rmse_RF, 'R2': r2_RF, 'Model': rfr},
+    df_rfr = pd.DataFrame({'RMSE': rmse_rfr, 'R2': r2_rfr, },
                           index=['Original', 'Normalized', 'Standardized', 'RobustScaler'])
-    print(df_rf)
+    print("\nRandom Forest Results\n", df_rfr)
+    print('\n')
+
 
     svr = SVR(kernel='rbf')
 
-    rmse_SVR = []
-    r2_SVR = []
+    rmse_svr = []
+    r2_svr = []
 
     # raw, normalized and standardized training and testing data
     trainX = [X_train, X_train_norm, X_train_stand, X_train_rob]
@@ -143,16 +153,17 @@ def scaler(X,y):
         # predict
         pred = svr.predict(testX[i])
         # RMSE
-        rmse_SVR.append(rmse(y_test, pred))
+        rmse_svr.append(rmse(y_test, pred))
+        # rmse_svr.append(np.sqrt(mean_squared_error(y_test,pred)))
         # R2
-        r2_SVR.append(r2_score(y_test, pred))
+        r2_svr.append(r2_score(y_test, pred))
 
     # visualizing the result
-    df_svr = pd.DataFrame({'RMSE': rmse_SVR, 'R2': r2_SVR, 'Model': svr},
+    print("\nSVR Results\n")
+    df_svr = pd.DataFrame({'RMSE': rmse_svr, 'R2': r2_svr},
                           index=['Original', 'Normalized', 'Standardized', 'RobustScaler'])
     print(df_svr)
-    
- #twine upload --repository-url https://test.pypi.org/legacy dist/*
- #pip install -e C:\Users\neloy\OneDrive\GitHub\data-scaler
+    print('\n')
 
-
+# twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+# pip install -e C:\Users\neloy\OneDrive\GitHub\data-scaler
