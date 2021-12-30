@@ -5,3 +5,7 @@ Change Log
 ------------------
 - First Release
 
+1.0.2 (29/12/2021)
+------------------
+- Installation Fixed
+

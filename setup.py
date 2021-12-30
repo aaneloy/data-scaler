@@ -2,8 +2,8 @@ import setuptools
 
 
 setuptools.setup(
-    name='data_inspector',
-    version='1.0',
+    name='data_scaler',
+    version='1.0.4',
     author="Asif Ahmed Neloy",
     author_email="neloyn@myumanitoba.ca",
     description="Data Scaler is an open-source python library to select the appropriate data scaler for your Machine Learning model.",
@@ -18,5 +18,5 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    install_requires=[['pandas==1.2.3','matplotlib==3.1.2','numpy==1.18.5', 'seaborn==0.11.1','scipy==1.6.2']]
+    install_requires=[]
 )

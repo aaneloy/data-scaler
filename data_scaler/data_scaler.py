@@ -79,8 +79,8 @@ def scaler(X,y):
 
     LR = LinearRegression()
 
-    rmse = []
-    r2 = []
+    rmse_LR = []
+    r2_LR = []
 
     # raw, normalized and standardized training and testing data
     trainX = [X_train, X_train_norm, X_train_stand, X_train_rob]
@@ -93,19 +93,19 @@ def scaler(X,y):
         # predict
         pred = LR.predict(testX[i])
         # RMSE
-        rmse.append(rmse(y_test, pred))
+        rmse_LR.append(rmse(y_test, pred))
         # r2
-        r2.append(r2_score(y_test, pred))
+        r2_LR.append(r2_score(y_test, pred))
 
     # visualizing the result
-    df_LR = pd.DataFrame({'RMSE': rmse, 'R2': r2, 'Model': LR}, index=['Original', 'Normalized', 'Standardized', 'RobustScaler'])
+    df_LR = pd.DataFrame({'RMSE': rmse_LR, 'R2': r2_LR, 'Model': LR}, index=['Original', 'Normalized', 'Standardized', 'RobustScaler'])
     print(df_LR)
 
     # rfr = RandomForestRegressor(n_estimators = 100, max_depth = 5, min_samples_leaf= 5, max_features = 'sqrt')  # using GridSearch
     rfr = RandomForestRegressor()
 
-    rmse = []
-    r2 = []
+    rmse_RF = []
+    r2_RF = []
 
     # raw, normalized and standardized training and testing data
     trainX = [X_train, X_train_norm, X_train_stand, X_train_rob]
@@ -118,19 +118,19 @@ def scaler(X,y):
         # predict
         pred = rfr.predict(testX[i])
         # RMSE
-        rmse.append(rmse(y_test, pred))
+        rmse_RF.append(rmse(y_test, pred))
         # R2
-        r2.append(r2_score(y_test, pred))
+        r2_RF.append(r2_score(y_test, pred))
 
     # visualizing the result
-    df_rf = pd.DataFrame({'RMSE': rmse, 'R2': r2, 'Model': rfr},
+    df_rf = pd.DataFrame({'RMSE': rmse_RF, 'R2': r2_RF, 'Model': rfr},
                           index=['Original', 'Normalized', 'Standardized', 'RobustScaler'])
     print(df_rf)
 
     svr = SVR(kernel='rbf')
 
-    rmse = []
-    r2 = []
+    rmse_SVR = []
+    r2_SVR = []
 
     # raw, normalized and standardized training and testing data
     trainX = [X_train, X_train_norm, X_train_stand, X_train_rob]
@@ -143,13 +143,16 @@ def scaler(X,y):
         # predict
         pred = svr.predict(testX[i])
         # RMSE
-        rmse.append(rmse(y_test, pred))
+        rmse_SVR.append(rmse(y_test, pred))
         # R2
-        r2.append(r2_score(y_test, pred))
+        r2_SVR.append(r2_score(y_test, pred))
 
     # visualizing the result
-    df_svr = pd.DataFrame({'RMSE': rmse, 'R2': r2, 'Model': svr},
+    df_svr = pd.DataFrame({'RMSE': rmse_SVR, 'R2': r2_SVR, 'Model': svr},
                           index=['Original', 'Normalized', 'Standardized', 'RobustScaler'])
     print(df_svr)
+    
+ #twine upload --repository-url https://test.pypi.org/legacy dist/*
+ #pip install -e C:\Users\neloy\OneDrive\GitHub\data-scaler
 
 
