@@ -31,7 +31,13 @@ Change Log
 
 1.0.8 (30/12/2021)
 ------------------
+- Sample Notebook added
+
+1.0.9 (31/12/2021)
+------------------
 - Current Working Version
+
+
 
 
 

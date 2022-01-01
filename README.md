@@ -18,5 +18,20 @@ Data Scaler is an open-source python library to select the appropriate data scal
 pip install DataScalerSelector
 ```
 
+## Sample Notebook
+In order to run the ``scalerselector_regression`` the following must be ensured:
+* ``NULL`` data must be handled
+* There should be no categorical variable.
+* Select the ``features X`` and ``Target variable y``
+* After selecting ``X`` and ``y`` run the follwing:
+```
+from DataScalerSelector import *
+
+scalerselector_regression(X,y)
+
+```
+
+For details see this [notebook](https://github.com/aaneloy/scaler_selector/blob/main/src/notebook/Sample.ipynb)
+
 ## License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
