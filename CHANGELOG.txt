@@ -35,8 +35,11 @@ Change Log
 
 1.0.9 (31/12/2021)
 ------------------
-- Current Working Version
+- Bug Fixed
 
+1.1.0 (03/01/2022)
+------------------
+- Current Working Version
 
 
 

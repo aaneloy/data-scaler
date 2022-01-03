@@ -165,5 +165,7 @@ def scalerselector_regression(X, y):
     print(df_svr)
     print('\n')
 
-# twine upload --repository-url https://test.pypi.org/legacy/ dist/*
-# pip install -e C:\Users\neloy\OneDrive\GitHub\data-scaler
+# python setup.py sdist bdist_wheel
+# pip install -e .
+# twine upload dist/*
+
