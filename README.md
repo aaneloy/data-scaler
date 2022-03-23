@@ -7,7 +7,7 @@
 Data Scaler Selector is an open-source python library to select the appropriate data scaler (**Min-Max, Robust or Standard Scaler**) for your Machine Learning model.
 
 
-## Author: [Asif Ahmed Neloy](https://aaneloy.netlify.app/)
+## Author: [Asif Ahmed Neloy](https://aaneloy.ca/)
 
 ## Project Description:
 Data Scaler is an open-source python library to select the appropriate data scaler for your Machine Learning model.
